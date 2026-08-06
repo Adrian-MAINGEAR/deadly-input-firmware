@@ -1,0 +1,7 @@
+{
+  "package": 1,
+  "version": 1281,
+  "url": "https://raw.githubusercontent.com/Adrian-MAINGEAR/deadly-input-firmware/main/kb60-firmware-r1.bin",
+  "sha256": "9807f3195947a3878b151b3767477fd2801b072cfa1d0a23b929109a22bd6cee",
+  "notes": "Fn+Backspace types Delete, and Fn+Enter toggles the lighting on and off."
+}
