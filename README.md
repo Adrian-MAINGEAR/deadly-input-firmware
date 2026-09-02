@@ -25,23 +25,29 @@ There is nothing to run here. If you want to configure your keyboard, use DI War
 }
 ```
 
-- **`package`** is the gate — a monotonic Deadly Input release number. DI Ware records it after a
-  successful update and offers a new one whenever this number is higher. **Bump it every release.**
-- **`version`** is the firmware version word the image reports (`1281` = "5.01"). Keep it truthful;
-  don't invent a bump to force an update, that's what `package` is for.
+- **`version`** is the gate, and it is the firmware version word the image actually reports
+  (`1293` = "5.13"). DI Ware offers an update whenever this is higher than what the board reports.
+  **The image has to be stamped with a real version** — `firmware/mk_version_patch.py` in the
+  configurator repo does that in four bytes. An image that reports the stock `1281` can never
+  update anybody, which is how release 1 sat here for a month being offered to nobody.
+- **`package`** is a monotonic Deadly Input release number, kept as the tiebreaker for a rebuild
+  that reuses a version. Bump it every release.
 - **`sha256`** is verified before anything is written. A mismatch aborts with nothing flashed.
 
 ## Releasing a new build
 
-1. Build the image and name it `kb60-firmware-r<N>.bin` — **never reuse or overwrite a filename**,
-   because old manifests and cached pages may still point at it.
-2. Commit it here alongside the existing ones.
-3. Update `manifest.json`: bump `package`, point `url` at the new file, replace `sha256`, and write
-   `notes` in plain language — it is shown to the person deciding whether to update.
+**Use `firmware/mk_release.py` in the configurator repo.** It writes both files and refuses the
+mistakes that are easy to make by hand: a bench image, a known-bad build by hash, a wrong-length or
+wrong-chip file, a version at or below stock (which could never update anyone), a version below the
+app's own feature gates, a package number that does not beat the published one, and a missing
+`sha256`.
 
 ```bash
-python -c "import hashlib;print(hashlib.sha256(open('kb60-firmware-r1.bin','rb').read()).hexdigest())"
+python firmware/mk_release.py --src kb60-firmware-r<N>.bin --notes "What changed, in plain language."
 ```
+
+Then copy `firmware/publish/` into this repo's root and push. **Never reuse or overwrite a
+filename** — old manifests and cached pages may still point at it.
 
 ## Recovering an interrupted update
 

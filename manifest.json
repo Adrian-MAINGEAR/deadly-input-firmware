@@ -1,7 +1,7 @@
 {
-  "package": 1,
-  "version": 1281,
-  "url": "https://raw.githubusercontent.com/Adrian-MAINGEAR/deadly-input-firmware/main/kb60-firmware-r1.bin",
-  "sha256": "9807f3195947a3878b151b3767477fd2801b072cfa1d0a23b929109a22bd6cee",
-  "notes": "Fn+Backspace types Delete, and Fn+Enter toggles the lighting on and off."
+  "package": 2,
+  "version": 1293,
+  "url": "https://raw.githubusercontent.com/Adrian-MAINGEAR/deadly-input-firmware/main/kb60-firmware-r4.bin",
+  "sha256": "b0bc1c3243a4d4580be5c8a9e3f4b9ad197c9098b2f683a9d6be124c09e03214",
+  "notes": "Fn-hold lighting now follows your own Fn layer instead of the one the keyboard shipped with, so remapped keys light correctly. Fn Lock on Z. Home, PgUp, PgDn and PrtSc moved to H, T, G and backslash. Brighter RGB. The keyboard now identifies itself as killboard60."
 }
